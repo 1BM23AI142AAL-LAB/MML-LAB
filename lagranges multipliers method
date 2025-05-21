@@ -1,0 +1,29 @@
+from sympy import symbols, Eq, solve
+x, y, z, lam = symbols('x y z lam')
+f = (x-3)**2 + (y-4)**2 + (z-12)**2
+g = x**2+y**2+z**2-1
+L=f+lam*g
+Lx=L.diff(x)
+Ly=L.diff(y)
+Lz=L.diff(z)
+Llam=L.diff(lam)
+solutions=solve([Lx,Ly,Lz,Llam],(x,y,z,lam),dict=True)
+distances=[]
+for sol in solutions:
+    dist_sq = f.subs(sol)
+    dist=dist_sq**0.5
+    distances.append((dist.evalf(), sol))
+min_dist=min(distances,key=lambda x:x[0])
+max_dist=max(distances,key=lambda x:x[0])
+print("Minimum distance:",min_dist[0])
+print("Point on sphere for minimum distance:",(min_dist[1][x],min_dist[1][y],min_dist[1][z]))
+print("Maximum distance:",max_dist[0])
+print("Point on sphere for maximum distance:",(max_dist[1][x],max_dist[1][y],max_dist[1][z]))
+
+
+
+output:
+Minimum distance: 12.0000000000000
+Point on sphere for minimum distance: (3/13, 4/13, 12/13)
+Maximum distance: 14.0000000000000
+Point on sphere for maximum distance: (-3/13, -4/13, -12/13)
