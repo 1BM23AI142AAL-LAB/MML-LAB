@@ -1,0 +1,28 @@
+from sympy import *
+x=symbols('x')
+a,b,n=-2,3,6
+f=x**2-2.6*x+2
+fi=[1,1,2,3,5,8,13]
+
+for k in range(1,7):
+  l=fi[n-k]*(b-a)/fi[n-k+1]
+  xk=b-l
+  yk=a+l
+  print()
+  print(f"Iteration {k}")
+  print(f"l : {l:.4f}")
+
+  print(f"x : {xk:.4f}")
+  print(f"y : {yk:.4f}")
+  fx=f.subs(x,xk)
+  fy=f.subs(x,yk)
+  print(f"fx : {fx:.4f}")
+  print(f"fy : {fy:.4f}")
+  if fx>fy:
+    a=xk
+  elif fx<fy:
+    b=yk
+  
+print(f"the value of a is {a:.4f} b is")
+x_ans=(a+b)/2
+print("the value of function is",f.subs(x,x_ans))
